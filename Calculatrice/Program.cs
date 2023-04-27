@@ -39,5 +39,17 @@ namespace Calculatrice
             int width = widthForm - (marges * 5);
             return width / ndButtonByLine;
         }
+        public static TextBox textDisplay(int positionX, int positionY, int sizeX, int SizeY, Color backColor, Color foreColor)
+        {
+            TextBox textDisplay = new TextBox();
+            textDisplay.Location = new System.Drawing.Point(positionX, positionY);
+            textDisplay.Size = new System.Drawing.Size(sizeX, SizeY);
+            textDisplay.BackColor = backColor;
+            textDisplay.ForeColor = foreColor;
+            textDisplay.MinimumSize = new Size(sizeX, SizeY);
+            textDisplay.Font = new Font("Arial", 30, FontStyle.Bold);
+            textDisplay.RightToLeft = RightToLeft.Yes;
+            return textDisplay;
+        }
     }
 }

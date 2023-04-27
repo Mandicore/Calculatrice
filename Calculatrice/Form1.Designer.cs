@@ -41,6 +41,7 @@
             MinimizeBox = false;
             Name = "Form1";
             Text = "Calculatrice";
+            Load += Form1_Load;
             ResumeLayout(false);
         }
 
