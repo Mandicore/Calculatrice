@@ -27,9 +27,9 @@ namespace Calculatrice
             button.Size = new Size(xSize, ySize);
             button.Location = new Point(xLocation, yLocation);
             button.FlatStyle = FlatStyle.Flat;
-            button.FlatAppearance.BorderColor = Color.Gray;
-            button.FlatAppearance.MouseDownBackColor = Color.Silver;
-            button.FlatAppearance.MouseOverBackColor = Color.LightGray;
+            button.FlatAppearance.BorderColor = Color.FromArgb(120, 255, 156, 182); ;
+            button.FlatAppearance.MouseDownBackColor = Color.FromArgb(120, 255, 156, 182);
+            button.FlatAppearance.MouseOverBackColor = Color.FromArgb(120, 255, 156, 182);
             return button;
         }
         public static int GetButtonWidth(int widthForm)

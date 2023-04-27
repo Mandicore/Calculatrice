@@ -34,7 +34,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(54, 59, 119);
+            BackColor = Color.FromArgb(125, 79, 254);
             ClientSize = new Size(455, 448);
             MaximizeBox = false;
             MdiChildrenMinimizedAnchorBottom = false;
