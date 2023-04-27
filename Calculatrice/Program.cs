@@ -1,3 +1,5 @@
+using System.Configuration.Internal;
+
 namespace Calculatrice
 {
     internal static class Program
@@ -8,10 +10,34 @@ namespace Calculatrice
         [STAThread]
         static void Main()
         {
-            // To customize application configuration such as set high DPI settings or default font,
-            // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
             Application.Run(new Form1());
+        }
+    }
+    public static class ButtonStyles
+    {
+
+        public static Button Create(string text, int xSize, int ySize, int xLocation, int yLocation, Color backColor, Color foreColor)
+        {
+            Button button = new Button();
+            button.Text = text;
+            button.BackColor = backColor;
+            button.ForeColor = foreColor;
+            button.Font = new Font("Arial", 12, FontStyle.Bold);
+            button.Size = new Size(xSize, ySize);
+            button.Location = new Point(xLocation, yLocation);
+            button.FlatStyle = FlatStyle.Flat;
+            button.FlatAppearance.BorderColor = Color.Gray;
+            button.FlatAppearance.MouseDownBackColor = Color.Silver;
+            button.FlatAppearance.MouseOverBackColor = Color.LightGray;
+            return button;
+        }
+        public static int GetButtonWidth(int widthForm)
+        {
+            int marges = 4;
+            int ndButtonByLine = 4;
+            int width = widthForm - (marges * 5);
+            return width / ndButtonByLine;
         }
     }
 }
