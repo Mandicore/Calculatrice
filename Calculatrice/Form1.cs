@@ -4,7 +4,29 @@ namespace Calculatrice
 {
     public partial class Form1 : Form
     {
+        //button init
         private TextBox textDisplay;
+        private Button button1;
+        private Button button2;
+        private Button button3;
+        private Button button4;
+        private Button button5;
+        private Button button6;
+        private Button button7;
+        private Button button8;
+        private Button button9;
+        private Button button0;
+        private Button buttonchangepositive;
+        private Button buttoncomma;
+        private Button buttonEqual;
+        private Button buttonMore;
+        private Button buttonLess;
+        private Button buttonMultiplication;
+        private Button buttonCE;
+        private Button buttonC;
+        private Button buttonPourcent;
+        private Button buttonDivision;
+
         public Form1()
         {
             InitializeComponent();
@@ -35,85 +57,88 @@ namespace Calculatrice
 
 
             // 1st lane
-            Button buttonchangepositive = ButtonStyles.Create("+/-", buttonWidth, buttonHeight, LocationXButton1, positionYLine1, backgroundColor, foregroundColor);
+            buttonchangepositive = ButtonStyles.Create("+/-", buttonWidth, buttonHeight, LocationXButton1, positionYLine1, backgroundColor, foregroundColor);
             this.Controls.Add(buttonchangepositive);
 
-            Button button0 = ButtonStyles.Create("0", buttonWidth, buttonHeight, LocationXButton2, positionYLine1, backgroundColor, foregroundColor);
+            button0 = ButtonStyles.Create("0", buttonWidth, buttonHeight, LocationXButton2, positionYLine1, backgroundColor, foregroundColor);
             button0.Click += new EventHandler(button0_Click);
             this.Controls.Add(button0);
 
-            Button buttoncomma = ButtonStyles.Create(",", buttonWidth, buttonHeight, LocationXButton3, positionYLine1, backgroundColor, foregroundColor);
+            buttoncomma = ButtonStyles.Create(",", buttonWidth, buttonHeight, LocationXButton3, positionYLine1, backgroundColor, foregroundColor);
             buttoncomma.Click += new EventHandler(buttoncomma_Click);
             this.Controls.Add(buttoncomma);
 
-            Button buttonEqual = ButtonStyles.Create("=", buttonWidth, buttonHeight, LocationXButton4, positionYLine1, backgroundColor, foregroundColor);
+            buttonEqual = ButtonStyles.Create("=", buttonWidth, buttonHeight, LocationXButton4, positionYLine1, backgroundColor, foregroundColor);
             this.Controls.Add(buttonEqual);
 
             // 2nd lane
-            Button button1 = ButtonStyles.Create("1", buttonWidth, buttonHeight, LocationXButton1, positionYLine2, backgroundColor, foregroundColor);
-            button1.Click += new EventHandler(button1_Click);
+            button1 = ButtonStyles.Create("1", buttonWidth, buttonHeight, LocationXButton1, positionYLine2, backgroundColor, foregroundColor);
+            button1.Click += button1_Click;
+            button1.KeyDown += button1_KeyDown;
             this.Controls.Add(button1);
 
-            Button button2 = ButtonStyles.Create("2", buttonWidth, buttonHeight, LocationXButton2, positionYLine2, backgroundColor, foregroundColor);
+            button2 = ButtonStyles.Create("2", buttonWidth, buttonHeight, LocationXButton2, positionYLine2, backgroundColor, foregroundColor);
             button2.Click += new EventHandler(button2_Click);
             this.Controls.Add(button2);
 
-            Button button3 = ButtonStyles.Create("3", buttonWidth, buttonHeight, LocationXButton3, positionYLine2, backgroundColor, foregroundColor);
+            button3 = ButtonStyles.Create("3", buttonWidth, buttonHeight, LocationXButton3, positionYLine2, backgroundColor, foregroundColor);
             button3.Click += new EventHandler(button3_Click);
             this.Controls.Add(button3);
 
-            Button buttonMore = ButtonStyles.Create("+", buttonWidth, buttonHeight, LocationXButton4, positionYLine2, backgroundColor, foregroundColor);
+            buttonMore = ButtonStyles.Create("+", buttonWidth, buttonHeight, LocationXButton4, positionYLine2, backgroundColor, foregroundColor);
             this.Controls.Add(buttonMore);
 
             //3th lane
-            Button button4 = ButtonStyles.Create("4", buttonWidth, buttonHeight, LocationXButton1, positionYLine3, backgroundColor, foregroundColor);
+            button4 = ButtonStyles.Create("4", buttonWidth, buttonHeight, LocationXButton1, positionYLine3, backgroundColor, foregroundColor);
             button4.Click += new EventHandler(button4_Click);
             this.Controls.Add(button4);
 
-            Button button5 = ButtonStyles.Create("5", buttonWidth, buttonHeight, LocationXButton2, positionYLine3, backgroundColor, foregroundColor);
+            button5 = ButtonStyles.Create("5", buttonWidth, buttonHeight, LocationXButton2, positionYLine3, backgroundColor, foregroundColor);
             button5.Click += new EventHandler(button5_Click);
             this.Controls.Add(button5);
 
-            Button button6 = ButtonStyles.Create("6", buttonWidth, buttonHeight, LocationXButton3, positionYLine3, backgroundColor, foregroundColor);
+            button6 = ButtonStyles.Create("6", buttonWidth, buttonHeight, LocationXButton3, positionYLine3, backgroundColor, foregroundColor);
             button6.Click += new EventHandler(button6_Click);
             this.Controls.Add(button6);
 
-            Button buttonLess = ButtonStyles.Create("-", buttonWidth, buttonHeight, LocationXButton4, positionYLine3, backgroundColor, foregroundColor);
+            buttonLess = ButtonStyles.Create("-", buttonWidth, buttonHeight, LocationXButton4, positionYLine3, backgroundColor, foregroundColor);
             this.Controls.Add(buttonLess);
 
             //4th lane
-            Button button7 = ButtonStyles.Create("7", buttonWidth, buttonHeight, LocationXButton1, positionYLine4, backgroundColor, foregroundColor);
+            button7 = ButtonStyles.Create("7", buttonWidth, buttonHeight, LocationXButton1, positionYLine4, backgroundColor, foregroundColor);
             button7.Click += new EventHandler(button7_Click);
             this.Controls.Add(button7);
 
-            Button button8 = ButtonStyles.Create("8", buttonWidth, buttonHeight, LocationXButton2, positionYLine4, backgroundColor, foregroundColor);
+            button8 = ButtonStyles.Create("8", buttonWidth, buttonHeight, LocationXButton2, positionYLine4, backgroundColor, foregroundColor);
             button8.Click += new EventHandler(button8_Click);
             this.Controls.Add(button8);
 
-            Button button9 = ButtonStyles.Create("9", buttonWidth, buttonHeight, LocationXButton3, positionYLine4, backgroundColor, foregroundColor);
+            button9 = ButtonStyles.Create("9", buttonWidth, buttonHeight, LocationXButton3, positionYLine4, backgroundColor, foregroundColor);
             button9.Click += new EventHandler(button9_Click);
             this.Controls.Add(button9);
 
-            Button buttonMultiplication = ButtonStyles.Create("×", buttonWidth, buttonHeight, LocationXButton4, positionYLine4, backgroundColor, foregroundColor);
+            buttonMultiplication = ButtonStyles.Create("×", buttonWidth, buttonHeight, LocationXButton4, positionYLine4, backgroundColor, foregroundColor);
             this.Controls.Add(buttonMultiplication);
 
             //5th lane
-            Button buttonCE = ButtonStyles.Create("CE", buttonWidth, buttonHeight, LocationXButton1, positionYLine5, backgroundColor, foregroundColor);
+            buttonCE = ButtonStyles.Create("CE", buttonWidth, buttonHeight, LocationXButton1, positionYLine5, backgroundColor, foregroundColor);
             this.Controls.Add(buttonCE);
 
-            Button buttonC = ButtonStyles.Create("C", buttonWidth, buttonHeight, LocationXButton2, positionYLine5, backgroundColor, foregroundColor);
+            buttonC = ButtonStyles.Create("C", buttonWidth, buttonHeight, LocationXButton2, positionYLine5, backgroundColor, foregroundColor);
             buttonC.Click += new EventHandler(buttonC_Click);
             this.Controls.Add(buttonC);
 
-            Button buttonPourcent = ButtonStyles.Create("%", buttonWidth, buttonHeight, LocationXButton3, positionYLine5, backgroundColor, foregroundColor);
+            buttonPourcent = ButtonStyles.Create("%", buttonWidth, buttonHeight, LocationXButton3, positionYLine5, backgroundColor, foregroundColor);
             this.Controls.Add(buttonPourcent);
 
-            Button buttonDivision = ButtonStyles.Create("÷", buttonWidth, buttonHeight, LocationXButton4, positionYLine5, backgroundColor, foregroundColor);
+            buttonDivision = ButtonStyles.Create("÷", buttonWidth, buttonHeight, LocationXButton4, positionYLine5, backgroundColor, foregroundColor);
             this.Controls.Add(buttonDivision);
 
             //Result display
             textDisplay = ButtonStyles.textDisplay(5, positionYDisplay, clientHeight - 10, 20, backgroundDisplay, foregroundDisplay);
             this.Controls.Add(textDisplay);
+
+            this.KeyDown += Form1_KeyDown;
         }
         private void button0_Click(object sender, EventArgs e)
         {
@@ -163,9 +188,79 @@ namespace Calculatrice
         {
             textDisplay.Text = textDisplay.Text + ",";
         }
+        private void button1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.NumPad1)
+            {
+                button1.PerformClick();
+            }
+        }
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.NumPad0)
+            {
+                button0.Select();
+                button0.PerformClick();
+                e.Handled = true;
+            }
+            if (e.KeyCode == Keys.NumPad1)
+            {
+                button1.Select();
+                button1.PerformClick();
+                e.Handled = true;
+            }
+            if (e.KeyCode == Keys.NumPad2)
+            {
+                button2.Select();
+                button2.PerformClick();
+                e.Handled = true;
+            }
+            if (e.KeyCode == Keys.NumPad3)
+            {
+                button3.Select();
+                button3.PerformClick();
+                e.Handled = true;
+            }
+            if (e.KeyCode == Keys.NumPad4)
+            {
+                button4.Select();
+                button4.PerformClick();
+                e.Handled = true;
+            }
+            if (e.KeyCode == Keys.NumPad5)
+            {
+                button5.Select();
+                button5.PerformClick();
+                e.Handled = true;
+            }
+            if (e.KeyCode == Keys.NumPad6)
+            {
+                button6.Select();
+                button6.PerformClick();
+                e.Handled = true;
+            }
+            if (e.KeyCode == Keys.NumPad7)
+            {
+                button7.Select();
+                button7.PerformClick();
+                e.Handled = true;
+            }
+            if (e.KeyCode == Keys.NumPad8)
+            {
+                button8.Select();
+                button8.PerformClick();
+                e.Handled = true;
+            }
+            if (e.KeyCode == Keys.NumPad9)
+            {
+                button9.Select();
+                button9.PerformClick();
+                e.Handled = true;
+            }
+        }
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            this.KeyPreview = true;
         }
     }
 }
