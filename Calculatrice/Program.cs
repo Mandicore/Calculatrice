@@ -51,15 +51,35 @@ namespace Calculatrice
             textDisplay.RightToLeft = RightToLeft.Yes;
             return textDisplay;
         }
+        public static Label CalculLabel(int LocationX, int LocationY, int sizeX, int SizeY, Color backColor)
+        {
+            Label Label = new Label();
+            Label.Location = new Point(LocationX, LocationY);
+            Label.Size = new Size(sizeX, SizeY);
+            Label.BackColor = backColor;
+            Label.ForeColor = Color.White;
+            Label.Font = new Font("Arial", 25, FontStyle.Regular);
+            Label.BorderStyle = BorderStyle.FixedSingle; // Style de bordure
+            Label.RightToLeft = RightToLeft.Yes;
+            return Label;
+
+
+        }
     }
     public static class Calculs
     {
-        public static void resetDisplay(string signe, int display, int calculField)
+        public static int calculMore(string display, int calculField)
         {
-            if (calculField != null)
+            int intDisplay = 0;
+            try
             {
-
+                intDisplay = int.Parse(display);
             }
+            catch
+            {
+                return 0;
+            }
+            return calculField + intDisplay;
         }
     }
 }
