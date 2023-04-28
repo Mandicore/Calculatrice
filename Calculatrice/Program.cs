@@ -58,8 +58,7 @@ namespace Calculatrice
             Label.Size = new Size(sizeX, SizeY);
             Label.BackColor = backColor;
             Label.ForeColor = Color.White;
-            Label.Font = new Font("Arial", 25, FontStyle.Regular);
-            Label.BorderStyle = BorderStyle.FixedSingle; // Style de bordure
+            Label.Font = new Font("Arial", 18, FontStyle.Regular);
             Label.RightToLeft = RightToLeft.Yes;
             return Label;
 
@@ -80,6 +79,19 @@ namespace Calculatrice
                 return 0;
             }
             return calculField + intDisplay;
+        }
+        public static int calculLess(string display, int calculField)
+        {
+            int intDisplay = 0;
+            try
+            {
+                intDisplay = int.Parse(display);
+            }
+            catch
+            {
+                return 0;
+            }
+            return calculField - intDisplay;
         }
     }
 }

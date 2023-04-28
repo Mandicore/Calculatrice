@@ -1,6 +1,3 @@
-using System.Security.Cryptography.Pkcs;
-using System.Windows.Forms;
-
 namespace Calculatrice
 {
     public partial class Form1 : Form
@@ -8,6 +5,7 @@ namespace Calculatrice
         //Displays init
         private TextBox textDisplay;
         private int calculField = 0;
+        private Label CalculLabel;
         //button init
         private Button button1;
         private Button button2;
@@ -34,6 +32,8 @@ namespace Calculatrice
         {
             InitializeComponent();
 
+            
+
             int clientWidth = this.ClientSize.Width;
             int clientHeight = this.ClientSize.Height;
 
@@ -51,7 +51,7 @@ namespace Calculatrice
             int positionYLine4 = positionYLine3 - (buttonHeight + 4);
             int positionYLine5 = positionYLine4 - (buttonHeight + 4);
             int positionYDisplay = 70;
-            int positionYLabel = 40;
+            int positionYLabel = 25;
 
             //set Location x of button
             int LocationXButton1 = 4;
@@ -59,8 +59,9 @@ namespace Calculatrice
             int LocationXButton3 = LocationXButton2 + buttonWidth + 4;
             int LocationXButton4 = LocationXButton3 + buttonWidth + 4;
 
-            Label CalculLabel = ButtonStyles.CalculLabel(LocationXButton1, positionYLabel, clientHeight - 10, 20, backgroundDisplay);
-            CalculLabel.Text = calculField.ToString();
+            CalculLabel = ButtonStyles.CalculLabel(LocationXButton1, positionYLabel, clientHeight - 10, 40, backgroundDisplay);
+            
+            this.Controls.Add(CalculLabel);
             textDisplay = ButtonStyles.textDisplay(5, positionYDisplay, clientHeight - 10, 20, backgroundDisplay, foregroundDisplay);
             this.Controls.Add(textDisplay);
 
@@ -82,7 +83,6 @@ namespace Calculatrice
             // 2nd lane
             button1 = ButtonStyles.Create("1", buttonWidth, buttonHeight, LocationXButton1, positionYLine2, backgroundColor, foregroundColor);
             button1.Click += button1_Click;
-            button1.KeyDown += button1_KeyDown;
             this.Controls.Add(button1);
 
             button2 = ButtonStyles.Create("2", buttonWidth, buttonHeight, LocationXButton2, positionYLine2, backgroundColor, foregroundColor);
@@ -111,6 +111,7 @@ namespace Calculatrice
             this.Controls.Add(button6);
 
             buttonLess = ButtonStyles.Create("-", buttonWidth, buttonHeight, LocationXButton4, positionYLine3, backgroundColor, foregroundColor);
+            buttonLess.Click += new EventHandler(buttonLess_Click);
             this.Controls.Add(buttonLess);
 
             //4th lane
@@ -150,43 +151,43 @@ namespace Calculatrice
         }
         private void button0_Click(object sender, EventArgs e)
         {
-            textDisplay.Text = textDisplay.Text + 0;
+            textDisplay.Text = textDisplay.Text + "0";
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            textDisplay.Text = textDisplay.Text + 1;
+            textDisplay.Text = textDisplay.Text + "1";
         }
         private void button2_Click(object sender, EventArgs e)
         {
-            textDisplay.Text = textDisplay.Text + 2;
+            textDisplay.Text = textDisplay.Text + "2";
         }
         private void button3_Click(object sender, EventArgs e)
         {
-            textDisplay.Text = textDisplay.Text + 3;
+            textDisplay.Text = textDisplay.Text + "3";
         }
         private void button4_Click(object sender, EventArgs e)
         {
-            textDisplay.Text = textDisplay.Text + 4;
+            textDisplay.Text = textDisplay.Text + "4";
         }
         private void button5_Click(object sender, EventArgs e)
         {
-            textDisplay.Text = textDisplay.Text + 5;
+            textDisplay.Text = textDisplay.Text + "5";
         }
         private void button6_Click(object sender, EventArgs e)
         {
-            textDisplay.Text = textDisplay.Text + 6;
+            textDisplay.Text = textDisplay.Text + "6";
         }
         private void button7_Click(object sender, EventArgs e)
         {
-            textDisplay.Text = textDisplay.Text + 7;
+            textDisplay.Text = textDisplay.Text + "7";
         }
         private void button8_Click(object sender, EventArgs e)
         {
-            textDisplay.Text = textDisplay.Text + 8;
+            textDisplay.Text = textDisplay.Text + "8";
         }
         private void button9_Click(object sender, EventArgs e)
         {
-            textDisplay.Text = textDisplay.Text + 9;
+            textDisplay.Text = textDisplay.Text + "9";
         }
         private void buttonC_Click(object sender, EventArgs e)
         {
@@ -199,10 +200,14 @@ namespace Calculatrice
         private void buttonMore_Click(object sender, EventArgs e)
         {
             calculField = Calculs.calculMore(textDisplay.Text, calculField);
+            CalculLabel.Text = calculField.ToString();
             textDisplay.Text = null;
         }
-        private void button1_KeyDown(object sender, KeyEventArgs e)
+        private void buttonLess_Click(object sender, EventArgs e)
         {
+            calculField = Calculs.calculLess(textDisplay.Text, calculField);
+            CalculLabel.Text = calculField.ToString();
+            textDisplay.Text = null;
         }
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
@@ -278,10 +283,26 @@ namespace Calculatrice
                 buttonMore.PerformClick();
                 e.Handled = true;
             }
+            if (e.KeyCode == Keys.Back)
+            {
+                if (textDisplay.Text.Length > 0)
+                {
+                    textDisplay.Text = textDisplay.Text.Substring(0, textDisplay.Text.Length - 1);
+                    e.Handled = true;
+                }
+                
+            }
+            if (e.KeyCode == Keys.Subtract)
+            {
+                buttonLess.Select();
+                buttonLess.PerformClick();
+                e.Handled = true;
+            }
         }
         private void Form1_Load(object sender, EventArgs e)
         {
             this.KeyPreview = true;
+            textDisplay.ReadOnly = true;
         }
     }
 }
