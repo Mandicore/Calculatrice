@@ -52,4 +52,14 @@ namespace Calculatrice
             return textDisplay;
         }
     }
+    public static class Calculs
+    {
+        public static void resetDisplay(string signe, int display, int calculField)
+        {
+            if (calculField != null)
+            {
+
+            }
+        }
+    }
 }

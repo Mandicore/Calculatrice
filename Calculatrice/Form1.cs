@@ -17,7 +17,7 @@ namespace Calculatrice
         private Button button9;
         private Button button0;
         private Button buttonchangepositive;
-        private Button buttoncomma;
+        private Button buttonComma;
         private Button buttonEqual;
         private Button buttonMore;
         private Button buttonLess;
@@ -64,9 +64,9 @@ namespace Calculatrice
             button0.Click += new EventHandler(button0_Click);
             this.Controls.Add(button0);
 
-            buttoncomma = ButtonStyles.Create(",", buttonWidth, buttonHeight, LocationXButton3, positionYLine1, backgroundColor, foregroundColor);
-            buttoncomma.Click += new EventHandler(buttoncomma_Click);
-            this.Controls.Add(buttoncomma);
+            buttonComma = ButtonStyles.Create(",", buttonWidth, buttonHeight, LocationXButton3, positionYLine1, backgroundColor, foregroundColor);
+            buttonComma.Click += new EventHandler(buttonComma_Click);
+            this.Controls.Add(buttonComma);
 
             buttonEqual = ButtonStyles.Create("=", buttonWidth, buttonHeight, LocationXButton4, positionYLine1, backgroundColor, foregroundColor);
             this.Controls.Add(buttonEqual);
@@ -184,7 +184,7 @@ namespace Calculatrice
         {
             textDisplay.Text = "";
         }
-        private void buttoncomma_Click(object sender, EventArgs e)
+        private void buttonComma_Click(object sender, EventArgs e)
         {
             textDisplay.Text = textDisplay.Text + ",";
         }
@@ -255,6 +255,12 @@ namespace Calculatrice
             {
                 button9.Select();
                 button9.PerformClick();
+                e.Handled = true;
+            }
+            if (e.KeyCode == Keys.Decimal)
+            {
+                buttonComma.Select();
+                buttonComma.PerformClick();
                 e.Handled = true;
             }
         }
