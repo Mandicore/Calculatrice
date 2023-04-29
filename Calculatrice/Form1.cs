@@ -1,3 +1,5 @@
+using System.Windows.Forms;
+
 namespace Calculatrice
 {
     public partial class Form1 : Form
@@ -81,6 +83,7 @@ namespace Calculatrice
             this.Controls.Add(buttonComma);
 
             buttonEqual = ButtonStyles.Create("=", buttonWidth, buttonHeight, LocationXButton4, positionYLine1, backgroundColor, foregroundColor);
+            buttonEqual.Click += new EventHandler(buttonEqual_Click);
             this.Controls.Add(buttonEqual);
 
             // 2nd lane
@@ -131,6 +134,7 @@ namespace Calculatrice
             this.Controls.Add(button9);
 
             buttonMultiplication = ButtonStyles.Create("×", buttonWidth, buttonHeight, LocationXButton4, positionYLine4, backgroundColor, foregroundColor);
+            buttonMultiplication.Click += new EventHandler(buttonMultiplication_Click);
             this.Controls.Add(buttonMultiplication);
 
             //5th lane
@@ -155,50 +159,62 @@ namespace Calculatrice
         private void button0_Click(object sender, EventArgs e)
         {
             textDisplay.Text = textDisplay.Text + "0";
+            buttonEqual.Focus();
         }
         private void button1_Click(object sender, EventArgs e)
         {
             textDisplay.Text = textDisplay.Text + "1";
+            buttonEqual.Focus();
         }
         private void button2_Click(object sender, EventArgs e)
         {
             textDisplay.Text = textDisplay.Text + "2";
+            buttonEqual.Focus();
         }
         private void button3_Click(object sender, EventArgs e)
         {
             textDisplay.Text = textDisplay.Text + "3";
+            buttonEqual.Focus();
         }
         private void button4_Click(object sender, EventArgs e)
         {
             textDisplay.Text = textDisplay.Text + "4";
+            buttonEqual.Focus();
         }
         private void button5_Click(object sender, EventArgs e)
         {
             textDisplay.Text = textDisplay.Text + "5";
+            buttonEqual.Focus();
         }
         private void button6_Click(object sender, EventArgs e)
         {
             textDisplay.Text = textDisplay.Text + "6";
+            buttonEqual.Focus();
         }
         private void button7_Click(object sender, EventArgs e)
         {
             textDisplay.Text = textDisplay.Text + "7";
+            buttonEqual.Focus();
         }
         private void button8_Click(object sender, EventArgs e)
         {
             textDisplay.Text = textDisplay.Text + "8";
+            buttonEqual.Focus();
         }
         private void button9_Click(object sender, EventArgs e)
         {
             textDisplay.Text = textDisplay.Text + "9";
+            buttonEqual.Focus();
         }
         private void buttonC_Click(object sender, EventArgs e)
         {
             textDisplay.Text = "";
+            buttonEqual.Focus();
         }
         private void buttonComma_Click(object sender, EventArgs e)
         {
             textDisplay.Text = textDisplay.Text + ",";
+            buttonEqual.Focus();
         }
         private void buttonMore_Click(object sender, EventArgs e)
         {
@@ -206,6 +222,7 @@ namespace Calculatrice
             monDelegate = Calculs.calculMore;
             CalculLabel.Text = calculField.ToString();
             textDisplay.Text = null;
+            buttonEqual.Focus();
         }
         private void buttonLess_Click(object sender, EventArgs e)
         {
@@ -213,9 +230,32 @@ namespace Calculatrice
             monDelegate = Calculs.calculLess;
             CalculLabel.Text = calculField.ToString();
             textDisplay.Text = null;
+            buttonEqual.Focus();
+        }
+        private void buttonEqual_Click(object sender, EventArgs e)
+        {
+            calculField = monDelegate(textDisplay.Text, calculField);
+            monDelegate = Calculs.emptyF;
+            CalculLabel.Text = null;
+            textDisplay.Text = calculField.ToString();
+            buttonEqual.Focus();
+        }
+        private void buttonMultiplication_Click(object sender, EventArgs e)
+        {
+            calculField = monDelegate(textDisplay.Text, calculField);
+            monDelegate = Calculs.Multiplication;
+            CalculLabel.Text = calculField.ToString();
+            textDisplay.Text = null;
+            buttonEqual.Focus();
         }
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
+            if ((e.KeyCode == Keys.Enter)||(e.KeyCode == Keys.Return))
+            {
+                buttonEqual.Select();
+                buttonEqual.PerformClick();
+                e.Handled = true;
+            }
             if (e.KeyCode == Keys.NumPad0)
             {
                 button0.Select();
@@ -308,6 +348,9 @@ namespace Calculatrice
         {
             this.KeyPreview = true;
             textDisplay.ReadOnly = true;
+        }
+        private void Form1_MouseClick(object sender, MouseEventArgs e)
+        {
         }
     }
 }

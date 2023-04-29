@@ -106,5 +106,18 @@ namespace Calculatrice
             }
             return intDisplay;
         }
+        public static int Multiplication(string display, int calculField)
+        {
+            int intDisplay = 0;
+            try
+            {
+                intDisplay = int.Parse(display);
+            }
+            catch
+            {
+                return 0;
+            }
+            return calculField * intDisplay;
+        }
     }
 }
