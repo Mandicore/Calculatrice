@@ -119,5 +119,18 @@ namespace Calculatrice
             }
             return calculField * intDisplay;
         }
+        public static int Division(string display, int calculField)
+        {
+            int intDisplay = 0;
+            try
+            {
+                intDisplay = int.Parse(display);
+            }
+            catch
+            {
+                return 0;
+            }
+            return calculField / intDisplay;
+        }
     }
 }

@@ -149,6 +149,7 @@ namespace Calculatrice
             this.Controls.Add(buttonPourcent);
 
             buttonDivision = ButtonStyles.Create("÷", buttonWidth, buttonHeight, LocationXButton4, positionYLine5, backgroundColor, foregroundColor);
+            buttonDivision.Click += new EventHandler(buttonDivision_Click);
             this.Controls.Add(buttonDivision);
 
             //KeyPass
@@ -248,8 +249,29 @@ namespace Calculatrice
             textDisplay.Text = null;
             buttonEqual.Focus();
         }
+        private void buttonDivision_Click(object sender, EventArgs e)
+        {
+            calculField = monDelegate(textDisplay.Text, calculField);
+            monDelegate = Calculs.Division;
+            CalculLabel.Text = calculField.ToString();
+            textDisplay.Text = null;
+            buttonEqual.Focus();
+        }
+
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
+            if (e.KeyCode == Keys.Divide)
+            {
+                buttonDivision.Select();
+                buttonDivision.PerformClick();
+                e.Handled = true;
+            }
+            if (e.KeyCode == Keys.Multiply)
+            {
+                buttonMultiplication.Select();
+                buttonMultiplication.PerformClick();
+                e.Handled = true;
+            }
             if ((e.KeyCode == Keys.Enter)||(e.KeyCode == Keys.Return))
             {
                 buttonEqual.Select();
