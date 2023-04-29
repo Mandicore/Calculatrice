@@ -5,11 +5,11 @@ namespace Calculatrice
     public partial class Form1 : Form
     {
         //actions
-        private delegate int FonctionDelegate(string argument1, int argument2);
+        private delegate double FonctionDelegate(string argument1, double argument2);
         FonctionDelegate monDelegate = Calculs.emptyF;
         //Displays init
         private TextBox textDisplay;
-        private int calculField = 0;
+        private double calculField = 0;
         private Label CalculLabel;
         //button init
         private Button button1;

@@ -67,70 +67,70 @@ namespace Calculatrice
     }
     public static class Calculs
     {
-        public static int calculMore(string display, int calculField)
+        public static double calculMore(string display, double calculField)
         {
-            int intDisplay = 0;
+            double doubleDisplay = 0;
             try
             {
-                intDisplay = int.Parse(display);
+                doubleDisplay = double.Parse(display);
             }
             catch
             {
                 return 0;
             }
-            return calculField + intDisplay;
+            return calculField + doubleDisplay;
         }
-        public static int calculLess(string display, int calculField)
+        public static double calculLess(string display, double calculField)
         {
-            int intDisplay = 0;
+            double doubleDisplay = 0;
             try
             {
-                intDisplay = int.Parse(display);
+                doubleDisplay = double.Parse(display);
             }
             catch
             {
                 return 0;
             }
-            return calculField - intDisplay;
+            return calculField - doubleDisplay;
         }
-        public static int emptyF(string display, int calculField) 
+        public static double emptyF(string display, double calculField) 
         {
-            int intDisplay = 0;
+            double doubleDisplay = 0;
             try
             {
-                intDisplay = int.Parse(display);
+                doubleDisplay = double.Parse(display);
             }
             catch
             {
                 return 0;
             }
-            return intDisplay;
+            return doubleDisplay;
         }
-        public static int Multiplication(string display, int calculField)
+        public static double Multiplication(string display, double calculField)
         {
-            int intDisplay = 0;
+            double doubleDisplay = 0;
             try
             {
-                intDisplay = int.Parse(display);
+                doubleDisplay = double.Parse(display);
             }
             catch
             {
                 return 0;
             }
-            return calculField * intDisplay;
+            return calculField * doubleDisplay;
         }
-        public static int Division(string display, int calculField)
+        public static double Division(string display, double calculField)
         {
-            int intDisplay = 0;
+            double doubleDisplay = 0;
             try
             {
-                intDisplay = int.Parse(display);
+                doubleDisplay = double.Parse(display);
             }
             catch
             {
                 return 0;
             }
-            return calculField / intDisplay;
+            return calculField / doubleDisplay;
         }
     }
 }
