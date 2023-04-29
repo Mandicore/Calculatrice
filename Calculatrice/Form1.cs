@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Windows.Forms;
 
 namespace Calculatrice
@@ -139,6 +140,7 @@ namespace Calculatrice
 
             //5th lane
             buttonCE = ButtonStyles.Create("CE", buttonWidth, buttonHeight, LocationXButton1, positionYLine5, backgroundColor, foregroundColor);
+            buttonCE.Click += new EventHandler(buttonCE_Click);
             this.Controls.Add(buttonCE);
 
             buttonC = ButtonStyles.Create("C", buttonWidth, buttonHeight, LocationXButton2, positionYLine5, backgroundColor, foregroundColor);
@@ -257,7 +259,12 @@ namespace Calculatrice
             textDisplay.Text = null;
             buttonEqual.Focus();
         }
-
+        private void buttonCE_Click(object sender, EventArgs e)
+        {
+            calculField = 0;
+            textDisplay.Text = null;
+            buttonEqual.Focus();
+        }
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Divide)
