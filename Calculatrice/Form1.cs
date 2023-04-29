@@ -2,6 +2,9 @@ namespace Calculatrice
 {
     public partial class Form1 : Form
     {
+        //actions
+        private delegate int FonctionDelegate(string argument1, int argument2);
+        FonctionDelegate monDelegate = Calculs.emptyF;
         //Displays init
         private TextBox textDisplay;
         private int calculField = 0;
@@ -199,13 +202,15 @@ namespace Calculatrice
         }
         private void buttonMore_Click(object sender, EventArgs e)
         {
-            calculField = Calculs.calculMore(textDisplay.Text, calculField);
+            calculField = monDelegate(textDisplay.Text, calculField);
+            monDelegate = Calculs.calculMore;
             CalculLabel.Text = calculField.ToString();
             textDisplay.Text = null;
         }
         private void buttonLess_Click(object sender, EventArgs e)
         {
-            calculField = Calculs.calculLess(textDisplay.Text, calculField);
+            calculField = monDelegate(textDisplay.Text, calculField);
+            monDelegate = Calculs.calculLess;
             CalculLabel.Text = calculField.ToString();
             textDisplay.Text = null;
         }
