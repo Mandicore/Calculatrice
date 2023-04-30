@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using System.Reflection.Emit;
 using System.Windows.Forms;
 
 namespace Calculatrice
@@ -11,7 +12,7 @@ namespace Calculatrice
         //Displays init
         private TextBox textDisplay;
         private double calculField = 0;
-        private Label CalculLabel;
+        private System.Windows.Forms.Label CalculLabel;
         //button init
         private Button button1;
         private Button button2;
@@ -33,22 +34,25 @@ namespace Calculatrice
         private Button buttonC;
         private Button buttonPourcent;
         private Button buttonDivision;
+        //items lists
+        private List<Button> buttonList = new List<Button>();
+        //screen size
+        private int clientWidth = 0;
+        private int clientHeight = 0;
 
         public Form1()
         {
             InitializeComponent();
 
-            
-
-            int clientWidth = this.ClientSize.Width;
-            int clientHeight = this.ClientSize.Height;
+            clientWidth = this.ClientSize.Width;
+            clientHeight = this.ClientSize.Height;
 
             Color backgroundColor = Color.FromArgb(180, 196, 159, 255);
             Color foregroundColor = Color.White;
             Color backgroundDisplay = Color.FromArgb(255, 125, 79, 254);
             Color foregroundDisplay = Color.White;
 
-            int buttonWidth = ButtonStyles.GetButtonWidth(clientWidth);
+            int buttonWidth = ScreenSize.GetButtonWidth(clientWidth);
             int buttonHeight = buttonWidth / 2;
 
             int positionYLine1 = clientHeight - ((buttonWidth / 2) + 4);
@@ -73,92 +77,128 @@ namespace Calculatrice
 
             // 1st lane
             buttonchangepositive = ButtonStyles.Create("+/-", buttonWidth, buttonHeight, LocationXButton1, positionYLine1, backgroundColor, foregroundColor);
+            buttonchangepositive.Click += new EventHandler(buttonchangepositive_Click);
             this.Controls.Add(buttonchangepositive);
+            buttonList.Add(buttonchangepositive);
 
             button0 = ButtonStyles.Create("0", buttonWidth, buttonHeight, LocationXButton2, positionYLine1, backgroundColor, foregroundColor);
             button0.Click += new EventHandler(button0_Click);
             this.Controls.Add(button0);
+            buttonList.Add(button0);
 
             buttonComma = ButtonStyles.Create(",", buttonWidth, buttonHeight, LocationXButton3, positionYLine1, backgroundColor, foregroundColor);
             buttonComma.Click += new EventHandler(buttonComma_Click);
             this.Controls.Add(buttonComma);
+            buttonList.Add(buttonComma);
 
             buttonEqual = ButtonStyles.Create("=", buttonWidth, buttonHeight, LocationXButton4, positionYLine1, backgroundColor, foregroundColor);
             buttonEqual.Click += new EventHandler(buttonEqual_Click);
             this.Controls.Add(buttonEqual);
+            buttonList.Add(buttonEqual);
 
             // 2nd lane
             button1 = ButtonStyles.Create("1", buttonWidth, buttonHeight, LocationXButton1, positionYLine2, backgroundColor, foregroundColor);
             button1.Click += button1_Click;
             this.Controls.Add(button1);
+            buttonList.Add(button1);
 
             button2 = ButtonStyles.Create("2", buttonWidth, buttonHeight, LocationXButton2, positionYLine2, backgroundColor, foregroundColor);
             button2.Click += new EventHandler(button2_Click);
             this.Controls.Add(button2);
+            buttonList.Add(button2);
 
             button3 = ButtonStyles.Create("3", buttonWidth, buttonHeight, LocationXButton3, positionYLine2, backgroundColor, foregroundColor);
             button3.Click += new EventHandler(button3_Click);
             this.Controls.Add(button3);
+            buttonList.Add(button3);
 
             buttonMore = ButtonStyles.Create("+", buttonWidth, buttonHeight, LocationXButton4, positionYLine2, backgroundColor, foregroundColor);
             buttonMore.Click += new EventHandler(buttonMore_Click);
             this.Controls.Add(buttonMore);
+            buttonList.Add(buttonMore);
 
             //3th lane
             button4 = ButtonStyles.Create("4", buttonWidth, buttonHeight, LocationXButton1, positionYLine3, backgroundColor, foregroundColor);
             button4.Click += new EventHandler(button4_Click);
             this.Controls.Add(button4);
+            buttonList.Add(button4);
 
             button5 = ButtonStyles.Create("5", buttonWidth, buttonHeight, LocationXButton2, positionYLine3, backgroundColor, foregroundColor);
             button5.Click += new EventHandler(button5_Click);
             this.Controls.Add(button5);
+            buttonList.Add(button5);
 
             button6 = ButtonStyles.Create("6", buttonWidth, buttonHeight, LocationXButton3, positionYLine3, backgroundColor, foregroundColor);
             button6.Click += new EventHandler(button6_Click);
             this.Controls.Add(button6);
+            buttonList.Add(button6);
 
             buttonLess = ButtonStyles.Create("-", buttonWidth, buttonHeight, LocationXButton4, positionYLine3, backgroundColor, foregroundColor);
             buttonLess.Click += new EventHandler(buttonLess_Click);
             this.Controls.Add(buttonLess);
+            buttonList.Add(buttonLess);
 
             //4th lane
             button7 = ButtonStyles.Create("7", buttonWidth, buttonHeight, LocationXButton1, positionYLine4, backgroundColor, foregroundColor);
             button7.Click += new EventHandler(button7_Click);
             this.Controls.Add(button7);
+            buttonList.Add(button7);
 
             button8 = ButtonStyles.Create("8", buttonWidth, buttonHeight, LocationXButton2, positionYLine4, backgroundColor, foregroundColor);
             button8.Click += new EventHandler(button8_Click);
             this.Controls.Add(button8);
+            buttonList.Add(button8);
 
             button9 = ButtonStyles.Create("9", buttonWidth, buttonHeight, LocationXButton3, positionYLine4, backgroundColor, foregroundColor);
             button9.Click += new EventHandler(button9_Click);
             this.Controls.Add(button9);
+            buttonList.Add(button9);
 
             buttonMultiplication = ButtonStyles.Create("×", buttonWidth, buttonHeight, LocationXButton4, positionYLine4, backgroundColor, foregroundColor);
             buttonMultiplication.Click += new EventHandler(buttonMultiplication_Click);
             this.Controls.Add(buttonMultiplication);
+            buttonList.Add(buttonMultiplication);
 
             //5th lane
             buttonCE = ButtonStyles.Create("CE", buttonWidth, buttonHeight, LocationXButton1, positionYLine5, backgroundColor, foregroundColor);
             buttonCE.Click += new EventHandler(buttonCE_Click);
             this.Controls.Add(buttonCE);
+            buttonList.Add(buttonCE);
 
             buttonC = ButtonStyles.Create("C", buttonWidth, buttonHeight, LocationXButton2, positionYLine5, backgroundColor, foregroundColor);
             buttonC.Click += new EventHandler(buttonC_Click);
             this.Controls.Add(buttonC);
+            buttonList.Add(buttonC);
 
             buttonPourcent = ButtonStyles.Create("%", buttonWidth, buttonHeight, LocationXButton3, positionYLine5, backgroundColor, foregroundColor);
             buttonPourcent.Click += new EventHandler(buttonPourcent_Click);
             this.Controls.Add(buttonPourcent);
+            buttonList.Add(buttonPourcent);
 
             buttonDivision = ButtonStyles.Create("÷", buttonWidth, buttonHeight, LocationXButton4, positionYLine5, backgroundColor, foregroundColor);
             buttonDivision.Click += new EventHandler(buttonDivision_Click);
             this.Controls.Add(buttonDivision);
+            buttonList.Add(buttonDivision);
 
             //KeyPass
             this.KeyDown += Form1_KeyDown;
 
-            
+            //redimention
+            System.Windows.Forms.Timer SizeTimer = ButtonStyles.SizeTimer(250);
+            SizeTimer.Tick += new EventHandler(SizeTimer_Tick);
+
+
+        }
+        private void SizeTimer_Tick(object sender, EventArgs e)
+        {
+            if ((clientWidth != ClientSize.Width)|| (clientHeight != ClientSize.Height))
+            {
+                clientWidth = this.ClientSize.Width;
+                foreach (Button button in buttonList)
+                {
+                    button.Size = new Size(ScreenSize.GetButtonWidth(clientWidth), ScreenSize.GetButtonWidth(clientWidth) / 2);
+                }
+            }
         }
         private void button0_Click(object sender, EventArgs e)
         {
@@ -269,8 +309,12 @@ namespace Calculatrice
         }
         private void buttonPourcent_Click(object sender, EventArgs e)
         {
-            textDisplay.Text = Calculs.Pourcent(textDisplay.Text, calculField).ToString();
+            textDisplay.Text = Calculs.Pourcent(textDisplay.Text).ToString();
 
+        }
+        private void buttonchangepositive_Click(object sender, EventArgs e)
+        {
+            textDisplay.Text = Calculs.numberSign(textDisplay.Text).ToString();
         }
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {

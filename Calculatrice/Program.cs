@@ -32,13 +32,6 @@ namespace Calculatrice
             button.FlatAppearance.MouseOverBackColor = Color.FromArgb(120, 255, 156, 182);
             return button;
         }
-        public static int GetButtonWidth(int widthForm)
-        {
-            int marges = 4;
-            int ndButtonByLine = 4;
-            int width = widthForm - (marges * 5);
-            return width / ndButtonByLine;
-        }
         public static TextBox textDisplay(int positionX, int positionY, int sizeX, int SizeY, Color backColor, Color foreColor)
         {
             TextBox textDisplay = new TextBox();
@@ -48,7 +41,7 @@ namespace Calculatrice
             textDisplay.ForeColor = foreColor;
             textDisplay.MinimumSize = new Size(sizeX, SizeY);
             textDisplay.Font = new Font("Arial", 30, FontStyle.Bold);
-            textDisplay.RightToLeft = RightToLeft.Yes;
+            textDisplay.TextAlign = HorizontalAlignment.Right;
             return textDisplay;
         }
         public static Label CalculLabel(int LocationX, int LocationY, int sizeX, int SizeY, Color backColor)
@@ -59,10 +52,17 @@ namespace Calculatrice
             Label.BackColor = backColor;
             Label.ForeColor = Color.White;
             Label.Font = new Font("Arial", 18, FontStyle.Regular);
-            Label.RightToLeft = RightToLeft.Yes;
+            Label.TextAlign = ContentAlignment.MiddleRight;
             return Label;
 
 
+        }
+        public static System.Windows.Forms.Timer SizeTimer(int time)
+        {
+            System.Windows.Forms.Timer formSize = new System.Windows.Forms.Timer();
+            formSize.Interval = time;
+            formSize.Enabled = true;
+            return formSize;
         }
     }
     public static class Calculs
@@ -132,7 +132,7 @@ namespace Calculatrice
             }
             return calculField / doubleDisplay;
         }
-        public static double Pourcent(string display, double calculField)
+        public static double Pourcent(string display)
         {
             double doubleDisplay = 0;
             try
@@ -144,6 +144,36 @@ namespace Calculatrice
                 return 0;
             }
             return doubleDisplay / 100;
+        }
+        public static double numberSign(string display)
+        {
+            double doubleDisplay = 0;
+            try
+            {
+                doubleDisplay = double.Parse(display);
+            }
+            catch
+            {
+                return 0;
+            }
+            if (doubleDisplay > 0)
+            {
+                return - doubleDisplay;
+            }
+            else
+            {
+                return doubleDisplay + (- doubleDisplay * 2); 
+            }
+        }
+    }
+    public static class ScreenSize
+    {
+        public static int GetButtonWidth(int widthForm)
+        {
+            int marges = 4;
+            int ndButtonByLine = 4;
+            int width = widthForm - (marges * 5);
+            return width / ndButtonByLine;
         }
     }
 }
