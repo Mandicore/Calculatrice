@@ -148,6 +148,7 @@ namespace Calculatrice
             this.Controls.Add(buttonC);
 
             buttonPourcent = ButtonStyles.Create("%", buttonWidth, buttonHeight, LocationXButton3, positionYLine5, backgroundColor, foregroundColor);
+            buttonPourcent.Click += new EventHandler(buttonPourcent_Click);
             this.Controls.Add(buttonPourcent);
 
             buttonDivision = ButtonStyles.Create("÷", buttonWidth, buttonHeight, LocationXButton4, positionYLine5, backgroundColor, foregroundColor);
@@ -263,7 +264,13 @@ namespace Calculatrice
         {
             calculField = 0;
             textDisplay.Text = null;
+            CalculLabel.Text = null;
             buttonEqual.Focus();
+        }
+        private void buttonPourcent_Click(object sender, EventArgs e)
+        {
+            textDisplay.Text = Calculs.Pourcent(textDisplay.Text, calculField).ToString();
+
         }
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {

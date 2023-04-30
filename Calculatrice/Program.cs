@@ -132,5 +132,18 @@ namespace Calculatrice
             }
             return calculField / doubleDisplay;
         }
+        public static double Pourcent(string display, double calculField)
+        {
+            double doubleDisplay = 0;
+            try
+            {
+                doubleDisplay = double.Parse(display);
+            }
+            catch
+            {
+                return 0;
+            }
+            return doubleDisplay / 100;
+        }
     }
 }
