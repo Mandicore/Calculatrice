@@ -28,17 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             SuspendLayout();
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackColor = Color.FromArgb(125, 79, 254);
             ClientSize = new Size(455, 448);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
+            MaximumSize = new Size(471, 487);
             MdiChildrenMinimizedAnchorBottom = false;
             MinimizeBox = false;
+            MinimumSize = new Size(471, 487);
             Name = "Form1";
             Text = "Calculatrice";
             Load += Form1_Load;
